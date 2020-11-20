@@ -1,7 +1,10 @@
+import { AppBar } from "./AppBar"
 import React from "react"
 
 export function Root() {
     return (
-        <div>this is the root component</div>
+        <div>
+            <AppBar />
+        </div>
     )
 } 
