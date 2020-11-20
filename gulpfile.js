@@ -1,15 +1,19 @@
+require('dotenv').config()
 const gulp = require('gulp'); 
 const scpClient = require('scp2');
 const homedir = require('os').homedir()
 const path = require("path")
 const fs = require("fs")
-const privateKey = fs.readFileSync(path.resolve(homedir, ".ssh/id_rsa_win"))
+
+const sshPath = process.env.SSH_PATH ? process.env.SSH_PATH : path.resolve(homedir, ".ssh")
+
+const privateKey = fs.readFileSync(path.join(sshPath, process.env.PRIVATE_KEY_FILE))
 
 function scp(file, dest) {
     return new Promise((resolve, reject) => {
         scpClient.scp(file, {
-            host: "hades",
-            username: "corentin", 
+            host: process.env.HOST,
+            username: process.env.USER, 
             path: path.join("/home/corentin/temp_api", dest),
             privateKey
         }, (err) => {
@@ -26,4 +30,3 @@ function scp(file, dest) {
 gulp.task('deploy', async () => {
     scp("dist", "public")
 });
-
