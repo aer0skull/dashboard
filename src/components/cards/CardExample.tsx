@@ -1,6 +1,8 @@
 import { Button, ButtonGroup, Paper } from "@material-ui/core"
 import { Typography } from "@material-ui/core"
 import React from "react"
+import { useFlux } from "../../flux"
+import { getLocalStorageTheme } from "../../utils"
 
 const rootStyle = undefined
 
@@ -20,7 +22,7 @@ export function CardExample(props: CardExampleProps) {
             <div>
                 <Typography>this is my card, here the value props : {props.value}</Typography>
             </div>
-            <ButtonGroup color="primary" aria-label="outlined primary button group">
+            <ButtonGroup color="inherit" aria-label="outlined primary button group">
                 <Button
                     onClick={() => {
                         setCount(count - 1)
